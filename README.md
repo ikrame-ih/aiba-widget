@@ -26,75 +26,75 @@ Originally a personal gift built quickly and left on my machine. I later decided
 
 ## Preview
 
-Core flow in dark theme (default):
+Core flow in light theme:
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/compact-dark.png" alt="Compact timer — dark" />
+      <img src="docs/images/compact-light.png" alt="Compact timer — light" />
       <br /><sub><b>Compact</b></sub>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/images/plan-dark.png" alt="Plan — dark" />
+      <img src="docs/images/plan-light.png" alt="Plan — light" />
       <br /><sub><b>Plan</b></sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/focus-dark.png" alt="Focus — dark" />
+      <img src="docs/images/focus-light.png" alt="Focus — light" />
       <br /><sub><b>Focus</b></sub>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/images/unwind-dark.png" alt="Unwind — dark" />
+      <img src="docs/images/unwind-light.png" alt="Unwind — light" />
       <br /><sub><b>Unwind</b></sub>
     </td>
   </tr>
 </table>
 
 <details>
-<summary><strong>Light theme & more screens</strong></summary>
+<summary><strong>Dark theme & more screens</strong></summary>
 
 <br />
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/compact-light.png" alt="Compact timer — light" />
-      <br /><sub><b>Compact</b> — light</sub>
+      <img src="docs/images/compact-dark.png" alt="Compact timer — dark" />
+      <br /><sub><b>Compact</b> — dark</sub>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/images/plan-light.png" alt="Plan — light" />
-      <br /><sub><b>Plan</b> — light</sub>
+      <img src="docs/images/plan-dark.png" alt="Plan — dark" />
+      <br /><sub><b>Plan</b> — dark</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/focus-light.png" alt="Focus — light" />
-      <br /><sub><b>Focus</b> — light</sub>
+      <img src="docs/images/focus-dark.png" alt="Focus — dark" />
+      <br /><sub><b>Focus</b> — dark</sub>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/images/unwind-light.png" alt="Unwind — light" />
-      <br /><sub><b>Unwind</b> — light</sub>
+      <img src="docs/images/unwind-dark.png" alt="Unwind — dark" />
+      <br /><sub><b>Unwind</b> — dark</sub>
     </td>
   </tr>
   <tr>
-    <td width="50%" valign="top">
-      <img src="docs/images/preferences-dark.png" alt="Preferences — dark" />
-      <br /><sub><b>Preferences</b> — dark</sub>
-    </td>
     <td width="50%" valign="top">
       <img src="docs/images/preferences-light.png" alt="Preferences — light" />
       <br /><sub><b>Preferences</b> — light</sub>
     </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/preferences-dark.png" alt="Preferences — dark" />
+      <br /><sub><b>Preferences</b> — dark</sub>
+    </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/ask-aiba-dark.png" alt="Ask Aiba — dark" />
-      <br /><sub><b>Ask Aiba</b> — dark</sub>
-    </td>
-    <td width="50%" valign="top">
       <img src="docs/images/ask-aiba-light.png" alt="Ask Aiba — light" />
       <br /><sub><b>Ask Aiba</b> — light</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/ask-aiba-dark.png" alt="Ask Aiba — dark" />
+      <br /><sub><b>Ask Aiba</b> — dark</sub>
     </td>
   </tr>
 </table>
