@@ -33,10 +33,6 @@
     transform 0.28s var(--ease-out, ease);
 }
 
-.studio-view-transition__inner {
-  will-change: opacity, transform;
-}
-
 /* studioSpringIn defined in fluidity.css */
 
 .studio-overlay {
@@ -390,7 +386,7 @@
 }
 
 .plan-tomorrow-prompt {
-  margin: 0 0 20px;
+  margin: 0;
   padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid rgba(212, 163, 92, 0.18);
