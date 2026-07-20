@@ -26,21 +26,41 @@ Originally a personal gift built quickly and left on my machine. I later decided
 
 ## Preview
 
+Core flow in dark theme (default):
+
 <table>
   <tr>
     <td width="50%" valign="top">
       <img src="docs/images/compact-dark.png" alt="Compact timer — dark" />
-      <br /><sub><b>Compact</b> — dark</sub>
+      <br /><sub><b>Compact</b></sub>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/images/compact-light.png" alt="Compact timer — light" />
-      <br /><sub><b>Compact</b> — light</sub>
+      <img src="docs/images/plan-dark.png" alt="Plan — dark" />
+      <br /><sub><b>Plan</b></sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/plan-dark.png" alt="Plan — dark" />
-      <br /><sub><b>Plan</b> — dark</sub>
+      <img src="docs/images/focus-dark.png" alt="Focus — dark" />
+      <br /><sub><b>Focus</b></sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/unwind-dark.png" alt="Unwind — dark" />
+      <br /><sub><b>Unwind</b></sub>
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary><strong>Light theme & more screens</strong></summary>
+
+<br />
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/compact-light.png" alt="Compact timer — light" />
+      <br /><sub><b>Compact</b> — light</sub>
     </td>
     <td width="50%" valign="top">
       <img src="docs/images/plan-light.png" alt="Plan — light" />
@@ -49,18 +69,8 @@ Originally a personal gift built quickly and left on my machine. I later decided
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/focus-dark.png" alt="Focus — dark" />
-      <br /><sub><b>Focus</b> — dark</sub>
-    </td>
-    <td width="50%" valign="top">
       <img src="docs/images/focus-light.png" alt="Focus — light" />
       <br /><sub><b>Focus</b> — light</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <img src="docs/images/unwind-dark.png" alt="Unwind — dark" />
-      <br /><sub><b>Unwind</b> — dark</sub>
     </td>
     <td width="50%" valign="top">
       <img src="docs/images/unwind-light.png" alt="Unwind — light" />
@@ -88,6 +98,8 @@ Originally a personal gift built quickly and left on my machine. I later decided
     </td>
   </tr>
 </table>
+
+</details>
 
 ## Quick start
 
