@@ -283,6 +283,9 @@
   font-family: var(--font-serif);
   font-size: 14px;
   transition: color 0.2s var(--ease-out);
+  background: transparent;
+  border: 0;
+  color: var(--studio-text-body);
 }
 
 .studio-task-add--inline input:focus {
@@ -290,7 +293,7 @@
 }
 
 .studio-task-add--inline:focus-within {
-  background: rgba(80, 51, 52, 0.12);
+  background: rgba(80, 51, 52, 0.18);
   border-radius: 8px;
 }
 

@@ -6,6 +6,13 @@
   pointer-events: none;
 }
 
+/* After collapse, block clicks without fading — prevents − from hitting ⤢ */
+.app-shell.is-settling .widget,
+.app-shell.is-settling .compact-focus__meta,
+.app-shell.is-settling .compact-focus__meta button {
+  pointer-events: none !important;
+}
+
 .widget {
   transition:
     background 0.45s var(--ease-out, ease),
@@ -218,6 +225,45 @@
   border-radius: 10px;
   border: 1px solid rgba(212, 163, 92, 0.16);
   background: rgba(43, 40, 38, 0.24);
+}
+
+.focus-prep__objective-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  border-bottom: 1px solid rgba(197, 169, 117, 0.28);
+  border-radius: 0;
+  background: transparent;
+  padding: 4px 0 12px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--studio-text-body);
+  outline: none;
+  color-scheme: dark;
+}
+
+.focus-prep__objective-input::placeholder {
+  color: color-mix(in srgb, var(--studio-text-muted) 70%, transparent);
+  font-style: italic;
+}
+
+.focus-prep__objective-input:focus {
+  border-bottom-color: var(--studio-accent);
+}
+
+.focus-prep--direct .focus-prep__task {
+  padding: 8px 0 4px;
+  border: 0;
+  background: transparent;
+}
+
+[data-theme="light"] .focus-prep__objective-input {
+  color-scheme: light;
 }
 
 .focus-prep__task-label,

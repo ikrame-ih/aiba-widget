@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CompactWidget } from "./components/CompactWidget";
 import {
   ExpandedWidget,
@@ -12,6 +12,9 @@ import { useAibaBehavior } from "./hooks/useAibaBehavior";
 import { useEnvironment } from "./hooks/useEnvironment";
 import { useSessionController } from "./hooks/useSessionController";
 import type { WidgetMode } from "./types/app";
+
+/** Ignore expand clicks that land on compact chrome after the window shrinks under the cursor. */
+const MODE_SWITCH_LOCK_MS = 500;
 
 export function AppShell() {
   const copy = useCopy();
@@ -35,6 +38,8 @@ export function AppShell() {
   const [now, setNow] = useState(() => new Date());
   const [studioOverlay, setStudioOverlay] = useState<StudioOverlay>(null);
   const [transitioning, setTransitioning] = useState(false);
+  const [settling, setSettling] = useState(false);
+  const modeLockUntil = useRef(0);
 
   const widgetMode: WidgetMode = data.widgetMode;
   const sessionStatus = data.focusSession.status;
@@ -78,19 +83,28 @@ export function AppShell() {
 
   const expand = useCallback(async () => {
     if (widgetMode === "expanded") return;
+    if (Date.now() < modeLockUntil.current) return;
     setTransitioning(true);
-    await new Promise((resolve) => window.setTimeout(resolve, 220));
+    await new Promise((resolve) => window.setTimeout(resolve, 180));
+    if (Date.now() < modeLockUntil.current) {
+      setTransitioning(false);
+      return;
+    }
     await setWidgetMode("expanded");
     setTransitioning(false);
   }, [setWidgetMode, widgetMode]);
 
   const collapse = useCallback(async () => {
     if (widgetMode === "compact") return;
+    // Compact keeps the right edge fixed — the − click would otherwise land on ⤢.
+    modeLockUntil.current = Date.now() + MODE_SWITCH_LOCK_MS;
     setStudioOverlay(null);
-    setTransitioning(true);
-    await new Promise((resolve) => window.setTimeout(resolve, 220));
+    setSettling(true);
     await setWidgetMode("compact");
-    setTransitioning(false);
+    await new Promise((resolve) =>
+      window.setTimeout(resolve, MODE_SWITCH_LOCK_MS),
+    );
+    setSettling(false);
   }, [setWidgetMode, widgetMode]);
 
   // If we're already expanded, just change phase/tool — don't remount the window.
@@ -248,8 +262,9 @@ export function AppShell() {
 
   return (
     <div
-      className={`app-shell ${transitioning ? "is-transitioning" : ""} ${data.settings.reducedMotion ? "is-reduced-motion" : ""}`}
+      className={`app-shell ${transitioning ? "is-transitioning" : ""} ${settling ? "is-settling" : ""} ${data.settings.reducedMotion ? "is-reduced-motion" : ""}`}
       data-theme={data.settings.theme}
+      data-widget-mode={widgetMode}
       lang={locale}
     >
       <div className="drag-rail drag-rail--top" aria-hidden="true" />

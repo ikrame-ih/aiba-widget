@@ -6,6 +6,11 @@
   justify-content: center;
   padding: 0;
   position: relative;
+  color-scheme: dark;
+}
+
+.app-shell[data-theme="light"] {
+  color-scheme: light;
 }
 
 .widget {
@@ -64,22 +69,15 @@
   width: 28px;
 }
 
-.studio-layout ~ .drag-rail--right,
-.app-shell:has(.studio-layout) .drag-rail--right,
-.app-shell:has(.studio-layout) .drag-rail--left {
-  top: 0;
-  bottom: 0;
+.drag-rail--left {
+  left: 0;
 }
 
-/* Expanded: sidebar/header already drag — rails steal chrome & footer clicks */
-.app-shell:has(.studio-layout) .drag-rail--top,
-.app-shell:has(.studio-layout) .drag-rail--right,
-.app-shell:has(.studio-layout) .drag-rail--bottom,
-.app-shell:has(.studio-layout) .drag-rail--left {
-  pointer-events: none;
+.drag-rail--right {
+  right: 0;
 }
 
-/* Compact: keep rails, but leave the top-right control cluster clickable */
+/* Compact: leave the top-right control cluster clickable */
 .app-shell:has(.widget--compact) .drag-rail--top {
   right: 128px;
 }
@@ -88,12 +86,27 @@
   top: 58px;
 }
 
-.drag-rail--left {
-  left: 0;
+/*
+ * Expanded: keep edge drag, but carve out chrome that must stay clickable.
+ * − / × live top-right; Minimize · Preferences sit in the sidebar footer.
+ */
+.app-shell:has(.studio-layout) .drag-rail--top {
+  right: 96px;
+  height: 40px;
 }
 
-.drag-rail--right {
-  right: 0;
+.app-shell:has(.studio-layout) .drag-rail--right {
+  top: 52px;
+  width: 32px;
+}
+
+.app-shell:has(.studio-layout) .drag-rail--left {
+  width: 20px;
+}
+
+.app-shell:has(.studio-layout) .drag-rail--bottom {
+  left: 222px;
+  height: 28px;
 }
 
 .widget-header {
@@ -152,8 +165,35 @@
 button,
 input,
 textarea,
-select {
+select,
+a,
+[role="button"],
+[role="checkbox"],
+[role="textbox"],
+.studio-link,
+.studio-phase-nav,
+.ask-aiba,
+.studio-sidebar__footer,
+.studio-window-controls,
+.studio-back-link,
+.setting-row,
+.compact-focus__meta {
   -webkit-app-region: no-drag;
+}
+
+/* Default: empty chrome is draggable; interactive nodes above stay no-drag */
+.studio-layout,
+.studio-shell,
+.studio-main,
+.studio-main__body,
+.studio-main__content,
+.studio-main__header,
+.studio-main__titlebar,
+.compact-focus,
+.compact-focus__header,
+.compact-focus__stage,
+.compact-focus__footer {
+  -webkit-app-region: drag;
 }
 
 .widget-time {
@@ -1506,7 +1546,7 @@ select:disabled {
 
 .studio-main__grain,
 .studio-main__wash {
-  -webkit-app-region: no-drag;
+  -webkit-app-region: drag;
   pointer-events: none;
 }
 
@@ -1515,7 +1555,7 @@ select:disabled {
 }
 
 .studio-main__content {
-  -webkit-app-region: no-drag;
+  -webkit-app-region: drag;
 }
 
 .ask-aiba {
@@ -2165,7 +2205,7 @@ select:disabled {
   flex-direction: column;
   background: var(--studio-bg);
   position: relative;
-  -webkit-app-region: no-drag;
+  -webkit-app-region: drag;
   border-left: 0;
 }
 
@@ -2573,33 +2613,67 @@ select:disabled {
   padding: 0;
 }
 
+.studio-task-add {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 4px;
+}
+
+.studio-task-add input {
+  flex: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--studio-border);
+  border-radius: var(--radius-input);
+  background: color-mix(in srgb, var(--studio-accent-box) 55%, transparent);
+  padding: 8px 10px;
+  color: var(--studio-text-body);
+  font-size: 12px;
+  color-scheme: dark;
+}
+
+.studio-task-add input::placeholder {
+  color: color-mix(in srgb, var(--studio-text-muted) 80%, transparent);
+}
+
 .studio-task-add--inline {
   display: flex;
   align-items: center;
   gap: 16px;
   margin-top: 0;
-  padding: 12px 0;
+  padding: 10px 4px;
+  border-radius: 8px;
+  border-bottom: 1px solid rgba(197, 169, 117, 0.14);
 }
 
 .studio-task-add--inline input {
   flex: 1;
+  appearance: none;
+  -webkit-appearance: none;
   border: 0;
   background: transparent;
   padding: 0;
-  color: var(--phase-muted);
-  font-size: 13px;
+  color: var(--studio-text-body);
+  font-family: var(--font-serif);
+  font-size: 14px;
   font-style: italic;
+  color-scheme: dark;
 }
 
 .studio-task-add--inline input::placeholder {
-  color: color-mix(in srgb, var(--phase-muted) 80%, transparent);
+  color: color-mix(in srgb, var(--studio-text-muted) 75%, transparent);
   font-style: italic;
 }
 
 .studio-task-add--inline input:focus {
   outline: none;
-  color: var(--phase-text);
+  color: var(--studio-text-body);
   font-style: normal;
+}
+
+[data-theme="light"] .studio-task-add input,
+[data-theme="light"] .studio-task-add--inline input {
+  color-scheme: light;
 }
 
 .studio-task__ring--ghost {
@@ -2643,6 +2717,8 @@ select:disabled {
 
 .core-intent__title {
   width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
   border: 0;
   border-bottom: 1px solid var(--studio-border-strong);
   background: transparent;
@@ -2653,6 +2729,7 @@ select:disabled {
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: var(--studio-text-body);
+  color-scheme: dark;
 }
 
 .core-intent__title::placeholder {
@@ -2821,22 +2898,6 @@ select:disabled {
 .studio-task:hover .studio-task__remove,
 .studio-task__remove:focus-visible {
   opacity: 1;
-}
-
-.studio-task-add {
-  display: flex;
-  gap: 8px;
-  margin: 8px 0 4px;
-}
-
-.studio-task-add input {
-  flex: 1;
-  border: 1px solid var(--studio-border);
-  border-radius: var(--radius-input);
-  background: rgba(0, 0, 0, 0.15);
-  padding: 8px 10px;
-  color: var(--studio-text-body);
-  font-size: 12px;
 }
 
 .studio-notes-box {
@@ -3237,16 +3298,48 @@ select:disabled {
 .studio-main .text-input,
 .studio-main .textarea,
 .studio-main select,
-.studio-main .field-row input[type="text"] {
+.studio-main .field-row input[type="text"],
+.studio-main .studio-task-add input,
+.studio-main .studio-task__edit-input {
+  appearance: none;
+  -webkit-appearance: none;
   border: 1px solid var(--studio-border);
   background: color-mix(in srgb, var(--studio-accent-box) 85%, #2a2422);
   color: var(--studio-text-body);
   border-radius: 10px;
+  color-scheme: dark;
+}
+
+.studio-main .studio-task-add--inline input,
+.studio-main .focus-prep__objective-input,
+.studio-main .core-intent__title {
+  border: 0;
+  border-bottom: 1px solid rgba(197, 169, 117, 0.28);
+  background: transparent;
+  border-radius: 0;
+  color-scheme: dark;
+}
+
+.studio-main .studio-task-add--inline input {
+  border-bottom: 0;
 }
 
 .studio-main .text-input::placeholder,
-.studio-main .textarea::placeholder {
+.studio-main .textarea::placeholder,
+.studio-main .studio-task-add input::placeholder,
+.studio-main .focus-prep__objective-input::placeholder {
   color: color-mix(in srgb, var(--studio-text-muted) 75%, transparent);
+}
+
+[data-theme="light"] .studio-main .text-input,
+[data-theme="light"] .studio-main .textarea,
+[data-theme="light"] .studio-main select,
+[data-theme="light"] .studio-main .field-row input[type="text"],
+[data-theme="light"] .studio-main .studio-task-add input,
+[data-theme="light"] .studio-main .studio-task-add--inline input,
+[data-theme="light"] .studio-main .focus-prep__objective-input,
+[data-theme="light"] .studio-main .core-intent__title {
+  color-scheme: light;
 }
 
 .studio-main .btn-primary {
