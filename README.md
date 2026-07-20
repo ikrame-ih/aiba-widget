@@ -1,4 +1,4 @@
-# Aiba
+# <img src="src/assets/icon.png" alt="" width="28" height="28" /> Aiba
 
 ![Electron](https://img.shields.io/badge/Electron-35-47848F?logo=electron&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
