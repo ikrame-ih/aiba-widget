@@ -1,12 +1,8 @@
-<h1>
-  <img
-    src="src/assets/icon-readme.png"
-    alt=""
-    width="44"
-    height="44"
-    style="vertical-align: -0.55em; margin-right: 0.4rem"
-  />Aiba
-</h1>
+<p>
+  <img src="src/assets/icon-readme.png" width="72" height="72" alt="Aiba" />
+</p>
+
+# Aiba
 
 ![Electron](https://img.shields.io/badge/Electron-35-47848F?logo=electron&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
