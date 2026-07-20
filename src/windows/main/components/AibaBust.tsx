@@ -11,62 +11,69 @@ interface AibaBustProps {
 const DEFAULT_VIEWBOX = "48 6 144 218";
 const STUDIO_VIEWBOX = "30 -4 180 252";
 
-const EYE_OPEN: Record<AibaMood, { left: string; right: string; drowsy?: boolean }> = {
+const EYE_OPEN: Record<
+  AibaMood,
+  { left: string; right: string; drowsy?: boolean }
+> = {
   bright: {
-    left: "M 78 159 Q 89 154 100 159",
-    right: "M 140 159 Q 151 154 162 159",
+    left: "M 76 158 Q 89 150 102 158",
+    right: "M 138 158 Q 151 150 164 158",
   },
   focused: {
-    left: "M 78 160 Q 89 162 100 160",
-    right: "M 140 160 Q 151 162 162 160",
+    left: "M 76 160 L 102 160",
+    right: "M 138 160 L 164 160",
   },
   drowsy: {
-    left: "M 78 160 Q 89 166 100 160",
-    right: "M 140 160 Q 151 166 162 160",
+    left: "M 76 162 Q 89 170 102 162",
+    right: "M 138 162 Q 151 170 164 162",
     drowsy: true,
   },
 };
 
 const BROW_PATHS: Record<AibaMood, { left: string; right: string }> = {
   bright: {
-    left: "M 74 141 Q 89 137 104 141",
-    right: "M 136 141 Q 151 137 166 141",
+    left: "M 72 140 Q 89 134 106 140",
+    right: "M 134 140 Q 151 134 168 140",
   },
   focused: {
-    left: "M 74 141 Q 89 139 104 141",
-    right: "M 136 141 Q 151 139 166 141",
+    left: "M 74 142 Q 89 140 104 138",
+    right: "M 136 138 Q 151 140 166 142",
   },
   drowsy: {
-    left: "M 74 142 Q 89 140 104 142",
-    right: "M 136 142 Q 151 140 166 142",
+    left: "M 74 144 Q 89 146 104 144",
+    right: "M 136 144 Q 151 146 166 144",
   },
 };
 
 const MOUTH_PATHS: Record<AibaMood, { line: string; lips?: string }> = {
   bright: {
-    line: "M 112 194 Q 120 198 128 194",
-    lips: "M 113 195 Q 120 197 127 195 Q 120 201 113 195 Z",
+    line: "M 110 194 Q 120 202 130 194",
+    lips: "M 111 195 Q 120 199 129 195 Q 120 205 111 195 Z",
   },
   focused: {
-    line: "M 114 194 L 126 194",
+    line: "M 112 196 L 128 196",
   },
   drowsy: {
-    line: "M 114 194 Q 120 188 126 194",
+    line: "M 114 196 Q 120 190 126 196",
   },
 };
 
 export function AibaBust({
   mood,
-  behavior = "static",
+  behavior = "idle",
   reducedMotion = false,
   variant = "default",
 }: AibaBustProps) {
-  const behaviorClass =
-    reducedMotion || behavior === "static" ? "static" : behavior;
+  const behaviorClass = reducedMotion
+    ? "static"
+    : behavior === "static"
+      ? "idle"
+      : behavior;
   const eyes = EYE_OPEN[mood];
   const mouth = MOUTH_PATHS[mood];
   const brows = BROW_PATHS[mood];
   const isStudio = variant === "studio";
+  const showShine = mood === "bright";
 
   return (
     <svg
@@ -126,6 +133,12 @@ export function AibaBust({
             <g className="aiba-eyes">
               <path d={eyes.left} className="aiba-eye aiba-eye--left" />
               <path d={eyes.right} className="aiba-eye aiba-eye--right" />
+              {showShine ? (
+                <>
+                  <circle cx="92" cy="156" r="2.2" className="aiba-eye-shine" />
+                  <circle cx="154" cy="156" r="2.2" className="aiba-eye-shine" />
+                </>
+              ) : null}
             </g>
 
             {mouth.lips && mood === "bright" ? (
@@ -139,4 +152,3 @@ export function AibaBust({
     </svg>
   );
 }
-
