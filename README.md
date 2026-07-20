@@ -26,8 +26,6 @@ Originally a personal gift built quickly and left on my machine. I later rebuilt
 
 ## Preview
 
-Captured from the real Electron window (`npm run capture:readme`). Shown side-by-side so they stay readable on GitHub.
-
 <table>
   <tr>
     <td width="50%" valign="top">

@@ -1506,7 +1506,7 @@ select:disabled {
 
 .studio-main__grain,
 .studio-main__wash {
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
   pointer-events: none;
 }
 
@@ -2165,8 +2165,8 @@ select:disabled {
   height: 100%;
   min-height: 0;
   overflow: hidden;
-  /* Extra top padding so − / × sit above the phase header, not on top of it */
-  padding: 52px 36px 36px;
+  /* Extra top/right padding so − / × sit clear of the phase header */
+  padding: 52px 56px 36px 36px;
   scrollbar-width: thin;
   scrollbar-color: var(--phase-muted) transparent;
 }
@@ -2259,12 +2259,12 @@ select:disabled {
   -webkit-app-region: drag;
 }
 
-/* Window chrome — above the phase header so clicks actually land */
+/* Window chrome — above studio-shell; must stay no-drag (Electron hit-tests app-region separately from CSS) */
 .studio-window-controls {
   position: absolute;
   top: 10px;
   right: 12px;
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   align-items: center;
   gap: 2px;

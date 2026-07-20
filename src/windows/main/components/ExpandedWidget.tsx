@@ -248,27 +248,6 @@ export function ExpandedWidget({
       data-time-mode={timeMode}
       aria-label={copy.studio.title}
     >
-      <div className="studio-window-controls">
-        <button
-          type="button"
-          className="studio-window-controls__btn"
-          aria-label={copy.minimize}
-          title={copy.minimize}
-          onClick={onCollapse}
-        >
-          −
-        </button>
-        <button
-          type="button"
-          className="studio-window-controls__btn"
-          aria-label={copy.hideWidget}
-          title={copy.hideWidget}
-          onClick={() => window.api?.closeWindow()}
-        >
-          ×
-        </button>
-      </div>
-
       <div className="studio-shell">
         <StudioSidebar
           timeMode={timeMode}
@@ -317,6 +296,28 @@ export function ExpandedWidget({
             </div>
           </div>
         </section>
+      </div>
+
+      {/* Last in DOM + high z-index so Electron drag regions under the shell cannot steal clicks */}
+      <div className="studio-window-controls" data-exclude-roam>
+        <button
+          type="button"
+          className="studio-window-controls__btn no-drag"
+          aria-label={copy.minimize}
+          title={copy.minimize}
+          onClick={onCollapse}
+        >
+          −
+        </button>
+        <button
+          type="button"
+          className="studio-window-controls__btn no-drag"
+          aria-label={copy.hideWidget}
+          title={copy.hideWidget}
+          onClick={() => window.api?.closeWindow()}
+        >
+          ×
+        </button>
       </div>
     </main>
   );

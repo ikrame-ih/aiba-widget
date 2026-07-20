@@ -97,7 +97,7 @@ export const HELP_TOPICS = [
       "opciones",
     ],
     answer:
-      "Preferences covers theme, language, reduced motion, screen dimming, and optional site blocking. Site blocking only applies after you click Apply.",
+      "Preferences covers theme, language, reduced motion, screen dimming, and optional site blocking. Site blocking uses the Windows hosts file with admin approval, and Aiba removes those entries when focus ends, when you hide/quit, and again on the next launch if anything was left behind.",
     actions: [{ type: "switch-tool", tool: "preferences" }],
   },
   {
