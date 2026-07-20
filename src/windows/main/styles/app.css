@@ -241,9 +241,9 @@ select {
 
 .aiba-figure:not(.is-reduced).aiba-behavior--static .aiba-root,
 .aiba-figure.is-reduced .aiba-root,
-.aiba-bust .aiba-root,
-.aiba-bust .aiba-head,
-.aiba-bust .aiba-eye {
+.aiba-bust.is-reduced .aiba-root,
+.aiba-bust.is-reduced .aiba-head,
+.aiba-bust.is-reduced .aiba-eye {
   animation: none !important;
   transform: none !important;
 }
@@ -1717,6 +1717,11 @@ select:disabled {
   stroke: none;
 }
 
+.aiba-eye-shine {
+  fill: #191414;
+  opacity: 0.75;
+}
+
 .aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-ponytail {
   transform-box: fill-box;
 }
@@ -1734,6 +1739,29 @@ select:disabled {
 .aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-head {
   transform-origin: 120px 132px;
   animation: aibaHeadIdle 7s ease-in-out infinite;
+}
+
+.aiba-bust:not(.is-reduced).aiba-behavior--glance .aiba-head {
+  animation: aibaGlance 2.2s ease-in-out;
+}
+
+.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: aibaBlink 4.8s ease-in-out infinite;
+}
+
+.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-eye--right {
+  animation-delay: 0.06s;
+}
+
+.aiba-bust.aiba-behavior--sleep .aiba-eye,
+.aiba-bust.aiba-figure--drowsy .aiba-eye {
+  animation: none;
+}
+
+.aiba-bust.aiba-behavior--sleep .aiba-eye-shine {
+  display: none;
 }
 
 @keyframes aibaPonytailSwayLeft {
@@ -1780,11 +1808,19 @@ select:disabled {
   stroke: none;
 }
 
-.studio-layout .aiba-bust .aiba-eye,
-.studio-layout .aiba-bust .aiba-mouth,
+.studio-layout .aiba-bust .aiba-eye {
+  stroke: #191414;
+  stroke-width: 5;
+}
+
+.studio-layout .aiba-bust .aiba-mouth {
+  stroke: #191414;
+  stroke-width: 4;
+}
+
 .studio-layout .aiba-bust .aiba-brow {
   stroke: #191414;
-  stroke-width: 2;
+  stroke-width: 3;
 }
 
 .studio-layout .aiba-bust .aiba-kanzashi {
@@ -1802,8 +1838,8 @@ select:disabled {
   transform: none !important;
 }
 
-.studio-sidebar__avatar .aiba-bust .aiba-root,
-.studio-sidebar__avatar .aiba-bust .aiba-head {
+.studio-sidebar__avatar .aiba-bust.is-reduced .aiba-root,
+.studio-sidebar__avatar .aiba-bust.is-reduced .aiba-head {
   animation: none !important;
   transform: none !important;
 }
@@ -1846,9 +1882,11 @@ select:disabled {
 .studio-sidebar__footer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   flex-shrink: 0;
   padding-top: 8px;
+  margin-top: auto;
   -webkit-app-region: no-drag;
 }
 
@@ -1886,8 +1924,9 @@ select:disabled {
 .studio-sidebar__links {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 4px;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
   margin-top: 16px;
   padding-top: 14px;
   border-top: 1px solid rgba(197, 169, 117, 0.14);
@@ -1904,8 +1943,8 @@ select:disabled {
   cursor: pointer;
   transition: color 0.15s ease;
   min-height: 36px;
-  padding: 8px 10px;
-  margin: 0 -4px;
+  padding: 8px 8px;
+  margin: 0;
   border-radius: 8px;
   -webkit-app-region: no-drag;
   position: relative;
@@ -3183,6 +3222,7 @@ select:disabled {
 .studio-sidebar__footer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   -webkit-app-region: no-drag;
 }

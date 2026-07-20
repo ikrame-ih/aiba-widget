@@ -43,6 +43,7 @@ export function AppShell() {
   const { behavior, isSleeping } = useAibaBehavior({
     timeMode,
     sessionStatus,
+    reducedMotion: data.settings.reducedMotion,
   });
 
   useEffect(() => {

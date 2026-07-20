@@ -63,7 +63,8 @@
 .studio-sidebar__links {
   padding-top: 10px;
   border-top: 1px solid rgba(212, 163, 92, 0.1);
-  gap: 4px;
+  gap: 2px;
+  justify-content: center;
 }
 
 .studio-sidebar__link {

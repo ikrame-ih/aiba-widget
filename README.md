@@ -9,11 +9,11 @@
 
 Originally a personal gift built quickly and left on my machine. I later rebuilt it for portfolio work: clearer architecture, Preferences, session history, and offline Ask Aiba help.
 
-| | |
-| --- | --- |
-| **Source** | [github.com/ikrame-ih/aiba-widget](https://github.com/ikrame-ih/aiba-widget) |
-| **Platform** | Windows (Electron) |
-| **Data** | Local JSON only — no account, no cloud |
+|              |                                                                              |
+| ------------ | ---------------------------------------------------------------------------- |
+| **Source**   | [github.com/ikrame-ih/aiba-widget](https://github.com/ikrame-ih/aiba-widget) |
+| **Platform** | Windows (Electron)                                                           |
+| **Data**     | Local JSON only — no account, no cloud                                       |
 
 ## Highlights
 
@@ -107,21 +107,21 @@ npm run build
 npm start
 ```
 
-| Mode | Size |
-| --- | --- |
-| Compact | 400 × 480 |
+| Mode     | Size      |
+| -------- | --------- |
+| Compact  | 400 × 480 |
 | Expanded | 900 × 720 |
 
 ## Scripts
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Vite + Electron |
-| `npm run build` | Production renderer build |
-| `npm start` | Run built app |
-| `npm test` | Vitest (schema, session, bounds…) |
-| `npm run typecheck` | TypeScript (`tsc --noEmit`) |
-| `npm run test:electron` | Electron smoke (compact + expanded) |
+| Command                  | Purpose                                      |
+| ------------------------ | -------------------------------------------- |
+| `npm run dev`            | Vite + Electron                              |
+| `npm run build`          | Production renderer build                    |
+| `npm start`              | Run built app                                |
+| `npm test`               | Vitest (schema, session, bounds…)            |
+| `npm run typecheck`      | TypeScript (`tsc --noEmit`)                  |
+| `npm run test:electron`  | Electron smoke (compact + expanded)          |
 | `npm run capture:readme` | Regenerate README screenshots (dark + light) |
 
 ## Stack
