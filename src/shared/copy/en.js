@@ -177,9 +177,9 @@ export const en = {
     removeSiteBlock: "Remove site block",
     restoreDefaultSites: "Restore default list",
     removeSiteBlockHint:
-      "Apply site block first. Use Remove site block to undo the hosts file changes.",
+      "Remove clears Aiba's hosts entries. Always available — use it if a site stays blocked after closing the app.",
     siteBlockHint:
-      "Site blocking runs only when you click Apply. Windows will ask for admin approval once.",
+      "One hostname per line. Blocks while you focus (if enabled) or immediately when you click Apply. Cleared when focus ends, when you hide/quit Aiba, and again on next launch if anything was left behind.",
     displayName: "Your name",
     displayNamePlaceholder: "e.g. Alex",
     focusOutput: "What are you working on?",

@@ -79,7 +79,9 @@ export function PreferencesPanel({
 
   const banner =
     guardStatus &&
-    (guardStatus.active || guardStatus.sitesBlocked || guardStatus.helperRunning)
+    (guardStatus.active ||
+      guardStatus.sitesBlocked ||
+      guardStatus.helperRunning)
       ? guardBannerText(guardStatus, copy)
       : "";
 
@@ -131,9 +133,16 @@ export function PreferencesPanel({
       </div>
 
       <div className="settings-group">
-        <h3 className="settings-group__title">{copy.settingsGroups.appearance}</h3>
+        <h3 className="settings-group__title">
+          {copy.settingsGroups.appearance}
+        </h3>
         <SettingHint text={desc.appearance} />
-        <div className="segmented-control theme-toggle" data-exclude-roam role="group" aria-label={copy.labels.appearance}>
+        <div
+          className="segmented-control theme-toggle"
+          data-exclude-roam
+          role="group"
+          aria-label={copy.labels.appearance}
+        >
           <button
             type="button"
             className={data.settings.theme === "dark" ? "is-active" : ""}
@@ -188,7 +197,11 @@ export function PreferencesPanel({
             onUpdate((draft) => {
               draft.settings.reducedMotion = checked;
             });
-            showToast(checked ? copy.toast.reducedMotionOn : copy.toast.reducedMotionOff);
+            showToast(
+              checked
+                ? copy.toast.reducedMotionOn
+                : copy.toast.reducedMotionOff,
+            );
           }}
         />
       </div>
@@ -202,7 +215,9 @@ export function PreferencesPanel({
           checked={data.settings.tunnelVision}
           onChange={(checked) => {
             onTunnelVision(checked);
-            showToast(checked ? copy.toast.tunnelVisionOn : copy.toast.tunnelVisionOff);
+            showToast(
+              checked ? copy.toast.tunnelVisionOn : copy.toast.tunnelVisionOff,
+            );
           }}
         />
         <ToggleSetting
@@ -212,7 +227,11 @@ export function PreferencesPanel({
           checked={data.settings.deepWorkGuard}
           onChange={async (checked) => {
             await onGuard(checked);
-            showToast(checked ? copy.toast.deepWorkGuardOn : copy.toast.deepWorkGuardOff);
+            showToast(
+              checked
+                ? copy.toast.deepWorkGuardOn
+                : copy.toast.deepWorkGuardOff,
+            );
           }}
         />
       </div>
@@ -228,13 +247,18 @@ export function PreferencesPanel({
             onUpdate((draft) => {
               draft.settings.helperEnabled = checked;
             });
-            showToast(checked ? copy.toast.blockSitesOn : copy.toast.blockSitesOff);
+            showToast(
+              checked ? copy.toast.blockSitesOn : copy.toast.blockSitesOff,
+            );
           }}
         />
 
         {data.settings.helperEnabled && (
           <div className="settings-domains">
-            <label className="field-block field-block--stacked" data-exclude-roam>
+            <label
+              className="field-block field-block--stacked"
+              data-exclude-roam
+            >
               <span>{copy.labels.domains}</span>
               <SettingHint text={desc.domains} />
               <textarea
@@ -262,7 +286,6 @@ export function PreferencesPanel({
                 type="button"
                 className="btn-ghost settings-action"
                 data-exclude-roam
-                disabled={!guardStatus?.sitesBlocked}
                 onClick={() => void removeSiteBlock()}
               >
                 {copy.labels.removeSiteBlock}
@@ -276,8 +299,14 @@ export function PreferencesPanel({
                 {copy.labels.restoreDefaultSites}
               </button>
             </div>
-            {!guardStatus?.sitesBlocked && (
-              <p className="setting-hint settings-domains__revert-hint">{copy.labels.removeSiteBlockHint}</p>
+            {guardStatus?.sitesBlocked ? (
+              <p className="setting-hint settings-domains__revert-hint">
+                {copy.guard.sitesBlocked}
+              </p>
+            ) : (
+              <p className="setting-hint settings-domains__revert-hint">
+                {copy.labels.removeSiteBlockHint}
+              </p>
             )}
           </div>
         )}

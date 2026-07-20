@@ -14,12 +14,36 @@ let guardState = {
 
 let lastAppliedSitesKey = "";
 
+function getHostsPath() {
+  return path.join(
+    process.env.SystemRoot || "C:\\Windows",
+    "System32",
+    "drivers",
+    "etc",
+    "hosts",
+  );
+}
+
+function hostsHasGuardBlock() {
+  try {
+    return fs.readFileSync(getHostsPath(), "utf8").includes(START_MARKER);
+  } catch {
+    return false;
+  }
+}
+
+function refreshSitesBlockedFromHosts() {
+  const active = hostsHasGuardBlock();
+  guardState.sitesBlocked = active;
+  return active;
+}
+
 function resetGuardState() {
   guardState = {
     active: false,
     helperRunning: false,
     notificationsMuted: false,
-    sitesBlocked: false,
+    sitesBlocked: hostsHasGuardBlock(),
     message: "Guard idle",
   };
   lastAppliedSitesKey = "";
@@ -111,39 +135,58 @@ async function applySiteBlock(blockedSites = []) {
   }
 
   const sitesKey = sites.join(",");
-  if (guardState.sitesBlocked && sitesKey === lastAppliedSitesKey) {
+  if (refreshSitesBlockedFromHosts() && sitesKey === lastAppliedSitesKey) {
     return getGuardStatus();
   }
 
   const result = await runHelper("apply", sites);
   guardState.helperRunning = false;
-  guardState.sitesBlocked = result.success && result.active;
+  refreshSitesBlockedFromHosts();
   guardState.message = result.message;
   if (result.success && result.active) {
     lastAppliedSitesKey = sitesKey;
+    guardState.sitesBlocked = true;
   }
   return getGuardStatus();
 }
 
 async function removeSiteBlock() {
-  if (!guardState.sitesBlocked) {
+  // Always attempt cleanup when the hosts marker is present — in-memory state
+  // is lost on restart and must not leave sites blocked.
+  if (!hostsHasGuardBlock() && !guardState.sitesBlocked) {
+    lastAppliedSitesKey = "";
+    guardState.sitesBlocked = false;
     return getGuardStatus();
   }
 
   const result = await runHelper("remove", []);
   guardState.helperRunning = false;
-  guardState.sitesBlocked = false;
   lastAppliedSitesKey = "";
-  if (!result.success) {
+  refreshSitesBlockedFromHosts();
+
+  if (!result.success || hostsHasGuardBlock()) {
+    guardState.sitesBlocked = hostsHasGuardBlock();
     guardState.message =
       "Site-block cleanup needs administrator approval.";
   } else {
+    guardState.sitesBlocked = false;
     guardState.message = "Site block removed.";
   }
   return getGuardStatus();
 }
 
+/** Clear leftover hosts edits (startup / quit safety net). */
+async function ensureSiteBlockCleared() {
+  if (!hostsHasGuardBlock()) {
+    guardState.sitesBlocked = false;
+    lastAppliedSitesKey = "";
+    return getGuardStatus();
+  }
+  return removeSiteBlock();
+}
+
 function getGuardStatus() {
+  refreshSitesBlockedFromHosts();
   return { ...guardState };
 }
 
@@ -151,8 +194,10 @@ module.exports = {
   setFocusGuard,
   applySiteBlock,
   removeSiteBlock,
+  ensureSiteBlockCleared,
   getGuardStatus,
   openFocusAssist,
   resetGuardState,
+  hostsHasGuardBlock,
   sanitizeSites,
 };

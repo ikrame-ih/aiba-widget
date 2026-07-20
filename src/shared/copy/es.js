@@ -181,9 +181,9 @@ export const es = {
     removeSiteBlock: "Quitar bloqueo",
     restoreDefaultSites: "Restaurar lista predeterminada",
     removeSiteBlockHint:
-      "Primero aplica el bloqueo. Usa Quitar bloqueo para deshacer los cambios en el archivo hosts.",
+      "Quitar elimina las entradas de Aiba en el archivo hosts. Siempre disponible — úsalo si un sitio sigue bloqueado tras cerrar la app.",
     siteBlockHint:
-      "El bloqueo solo se ejecuta al pulsar Aplicar. Windows pedirá permiso de administrador una vez.",
+      "Un dominio por línea. Se bloquea durante el enfoque (si está activo) o al pulsar Aplicar. Se limpia al terminar el enfoque, al ocultar/cerrar Aiba, y otra vez al abrir si quedó algo.",
     displayName: "Tu nombre",
     displayNamePlaceholder: "p. ej. Alex",
     focusOutput: "¿En qué estás trabajando?",

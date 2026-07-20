@@ -14,14 +14,6 @@ export function useEnvironment({ data, update, isFocusing }: UseEnvironmentOptio
     window.api?.getGuardStatus().then(setGuardStatus);
   }, []);
 
-  const stopEnvironment = useCallback(async () => {
-    await Promise.all([
-      window.api?.setTunnelVision(false),
-      window.api?.removeSiteBlock(),
-      window.api?.setFocusGuard({ enabled: false }).then(setGuardStatus),
-    ]);
-  }, []);
-
   const startEnvironment = useCallback(async () => {
     if (data.settings.tunnelVision) {
       await window.api?.setTunnelVision(true);
@@ -30,7 +22,31 @@ export function useEnvironment({ data, update, isFocusing }: UseEnvironmentOptio
       const status = await window.api?.setFocusGuard({ enabled: true });
       if (status) setGuardStatus(status);
     }
-  }, [data.settings.deepWorkGuard, data.settings.tunnelVision]);
+    if (data.settings.helperEnabled) {
+      const status = await window.api?.applySiteBlock({
+        blockedSites: data.settings.blockedSites,
+      });
+      if (status) setGuardStatus(status);
+    }
+  }, [
+    data.settings.blockedSites,
+    data.settings.deepWorkGuard,
+    data.settings.helperEnabled,
+    data.settings.tunnelVision,
+  ]);
+
+  const stopEnvironment = useCallback(async () => {
+    const [, , status] = await Promise.all([
+      window.api?.setTunnelVision(false),
+      window.api?.setFocusGuard({ enabled: false }),
+      window.api?.removeSiteBlock(),
+    ]);
+    if (status) setGuardStatus(status);
+    else {
+      const next = await window.api?.getGuardStatus();
+      if (next) setGuardStatus(next);
+    }
+  }, []);
 
   const handleTunnelVision = useCallback(
     (enabled: boolean) => {

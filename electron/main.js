@@ -33,6 +33,7 @@ const {
   setFocusGuard,
   applySiteBlock,
   removeSiteBlock,
+  ensureSiteBlockCleared,
   getGuardStatus,
   openFocusAssist,
   resetGuardState,
@@ -98,8 +99,14 @@ function registerIpcHandlers() {
 
   ipcMain.on(IPC.CLOSE_WINDOW, (event) => {
     const window = BrowserWindow.fromWebContents(event.sender);
-    if (window === mainWindow) window.hide();
-    else if (window) window.close();
+    if (window === mainWindow) {
+      // Don't leave hosts edits active while the app is only hidden to tray.
+      const data = loadData();
+      const status = data?.focusSession?.status;
+      const focusing = status === "focusing" || status === "paused";
+      if (!focusing) void ensureSiteBlockCleared();
+      window.hide();
+    } else if (window) window.close();
   });
 
   ipcMain.handle(IPC.SET_WIDGET_MODE, (_event, mode) => {
@@ -506,7 +513,7 @@ async function runElectronSmoke(initialMode) {
   }
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   const saved = loadData();
   currentWidgetMode =
     process.env.AIBA_SMOKE_MODE === "expanded" ||
@@ -514,6 +521,16 @@ app.whenReady().then(() => {
       ? "expanded"
       : "compact";
   registerIpcHandlers();
+
+  // Safety net: never leave Aiba's hosts block active from a previous crash/quit.
+  if (!process.env.AIBA_README_CAPTURE && !process.env.AIBA_SMOKE) {
+    try {
+      await ensureSiteBlockCleared();
+    } catch {
+      // UAC decline is handled via guard status; continue launching.
+    }
+  }
+
   mainWindow = createMainWindow(currentWidgetMode);
   registerShortcuts(mainWindow);
   createTray();
@@ -560,7 +577,7 @@ app.on("before-quit", (event) => {
   if (cleanupBeforeQuitComplete) return;
   event.preventDefault();
   Promise.all([
-    removeSiteBlock(),
+    ensureSiteBlockCleared(),
     setFocusGuard({ enabled: false }),
     Promise.resolve(hideTunnelVision(mainWindow)),
   ]).finally(() => {
