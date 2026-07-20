@@ -63,7 +63,7 @@
   flex-direction: column;
   gap: 6px;
   min-width: 0;
-  -webkit-app-region: no-drag;
+  -webkit-app-region: drag;
 }
 
 .compact-focus__phase {
