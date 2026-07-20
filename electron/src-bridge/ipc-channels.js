@@ -1,0 +1,22 @@
+module.exports = {
+  IPC: {
+    OPEN_EXTERNAL: "open-external",
+    SHOW_NOTIFICATION: "show-notification",
+    LOAD_DATA: "load-data",
+    SAVE_DATA: "save-data",
+    OPEN_HELP_WINDOW: "open-help-window",
+    CLOSE_WINDOW: "close-window",
+    SET_WIDGET_MODE: "set-widget-mode",
+    GET_WIDGET_MODE: "get-widget-mode",
+    GET_WIDGET_MODE_SYNC: "get-widget-mode-sync",
+    WIDGET_MODE_CHANGED: "widget-mode-changed",
+    SHORTCUT_FIRED: "shortcut-fired",
+    SET_TUNNEL_VISION: "set-tunnel-vision",
+    SET_FOCUS_GUARD: "set-focus-guard",
+    APPLY_SITE_BLOCK: "apply-site-block",
+    REMOVE_SITE_BLOCK: "remove-site-block",
+    GET_GUARD_STATUS: "get-guard-status",
+    OPEN_FOCUS_ASSIST: "open-focus-assist",
+  },
+  ALLOWED_EXTERNAL_URLS: ["https://", "http://"],
+};

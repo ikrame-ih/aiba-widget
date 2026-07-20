@@ -1,0 +1,89 @@
+/* Light theme — contrast & surface fixes */
+
+[data-theme="light"] {
+  --studio-btn-solid: #503334;
+  --studio-btn-solid-hover: #3d2728;
+  --studio-btn-text: #faf7f4;
+  --studio-accent: #8a6a32;
+  --studio-accent-soft: rgba(138, 106, 50, 0.55);
+  --studio-border-strong: rgba(80, 51, 52, 0.28);
+  --phase-action: #503334;
+  --phase-action-hover: #3d2728;
+  --focus-ring: 0 0 0 2px var(--studio-bg), 0 0 0 4px rgba(80, 51, 52, 0.35);
+}
+
+[data-theme="light"] .studio-sidebar__greeting {
+  color: var(--studio-text-body);
+  font-weight: 500;
+}
+
+[data-theme="light"] .studio-sidebar__avatar {
+  border-color: rgba(80, 51, 52, 0.18);
+  background: linear-gradient(180deg, #d8c8c0 0%, #c9b8b0 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 12px 28px rgba(42, 37, 37, 0.1);
+}
+
+[data-theme="light"] .studio-phase-nav__item.is-active {
+  background: rgba(80, 51, 52, 0.1);
+}
+
+[data-theme="light"] .studio-phase-nav__label,
+[data-theme="light"] .studio-sidebar__link {
+  color: var(--studio-text-body);
+}
+
+[data-theme="light"] .ask-aiba--sidebar .ask-aiba__answer p {
+  color: var(--studio-text-body);
+}
+
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .studio-main .btn-primary {
+  background: var(--studio-btn-solid);
+  color: var(--studio-btn-text);
+  border-color: rgba(61, 39, 40, 0.5);
+}
+
+[data-theme="light"] .btn-primary:hover:not(:disabled),
+[data-theme="light"] .studio-main .btn-primary:hover:not(:disabled) {
+  background: var(--studio-btn-solid-hover);
+  color: var(--studio-btn-text);
+}
+
+[data-theme="light"] .studio-btn,
+[data-theme="light"] .studio-btn--outline {
+  color: var(--studio-text-body);
+  border-color: var(--studio-border-strong);
+}
+
+[data-theme="light"] .settings-group__title {
+  color: rgba(80, 51, 52, 0.75);
+}
+
+[data-theme="light"] .compact-focus__phase {
+  color: rgba(80, 51, 52, 0.72);
+}
+
+[data-theme="light"] .compact-focus__status-text {
+  color: var(--studio-text-body);
+}
+
+[data-theme="light"] .status-pill {
+  background: rgba(80, 51, 52, 0.08);
+  color: var(--studio-text-body);
+  border-color: rgba(80, 51, 52, 0.14);
+}
+
+[data-theme="light"] .status-pill--focusing {
+  background: rgba(138, 106, 50, 0.14);
+  border-color: rgba(138, 106, 50, 0.35);
+  color: #4a3820;
+}
+
+[data-theme="light"] .toast {
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--studio-text-body);
+  border-color: rgba(80, 51, 52, 0.12);
+  box-shadow: 0 12px 32px rgba(42, 37, 37, 0.14);
+}
