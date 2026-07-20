@@ -73,7 +73,6 @@ export function AibaBust({
   const mouth = MOUTH_PATHS[mood];
   const brows = BROW_PATHS[mood];
   const isStudio = variant === "studio";
-  const showShine = mood === "bright";
 
   return (
     <svg
@@ -133,12 +132,6 @@ export function AibaBust({
             <g className="aiba-eyes">
               <path d={eyes.left} className="aiba-eye aiba-eye--left" />
               <path d={eyes.right} className="aiba-eye aiba-eye--right" />
-              {showShine ? (
-                <>
-                  <circle cx="92" cy="156" r="2.2" className="aiba-eye-shine" />
-                  <circle cx="154" cy="156" r="2.2" className="aiba-eye-shine" />
-                </>
-              ) : null}
             </g>
 
             {mouth.lips && mood === "bright" ? (

@@ -181,12 +181,11 @@ a,
   -webkit-app-region: no-drag;
 }
 
-/* Default: empty chrome is draggable; interactive nodes above stay no-drag */
+/* Default: chrome is draggable; scrollable Plan content must stay no-drag */
 .studio-layout,
 .studio-shell,
 .studio-main,
 .studio-main__body,
-.studio-main__content,
 .studio-main__header,
 .studio-main__titlebar,
 .compact-focus,
@@ -194,6 +193,10 @@ a,
 .compact-focus__stage,
 .compact-focus__footer {
   -webkit-app-region: drag;
+}
+
+.studio-main__content {
+  -webkit-app-region: no-drag;
 }
 
 .widget-time {
@@ -871,7 +874,7 @@ select {
 
 .flow-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   margin-top: 16px;
   border: 1px solid var(--phase-border);
@@ -886,7 +889,8 @@ select {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 16px 10px;
+  min-height: 88px;
+  padding: 16px 12px;
   background: var(--phase-surface-strong);
   text-align: center;
 }
@@ -895,17 +899,20 @@ select {
   display: block;
   font-size: 22px;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--phase-accent);
 }
 
 .flow-card span {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--warm-gray);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 .deep-tools {
@@ -1555,7 +1562,7 @@ select:disabled {
 }
 
 .studio-main__content {
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
 }
 
 .ask-aiba {
@@ -1757,11 +1764,6 @@ select:disabled {
   stroke: none;
 }
 
-.aiba-eye-shine {
-  fill: #191414;
-  opacity: 0.75;
-}
-
 .aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-ponytail {
   transform-box: fill-box;
 }
@@ -1785,23 +1787,31 @@ select:disabled {
   animation: aibaGlance 2.2s ease-in-out;
 }
 
-.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-eye {
+.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep):not(.aiba-figure--drowsy) .aiba-eye {
   transform-box: fill-box;
-  transform-origin: center;
-  animation: aibaBlink 4.8s ease-in-out infinite;
+  transform-origin: 50% 70%;
+  animation: aibaBlink 6.4s linear infinite;
 }
 
-.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep) .aiba-eye--right {
-  animation-delay: 0.06s;
+.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep):not(.aiba-figure--drowsy) .aiba-eye--right {
+  animation-delay: 0.028s;
+}
+
+.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep):not(.aiba-figure--drowsy) .aiba-brow {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: aibaBrowBlink 6.4s linear infinite;
+}
+
+.aiba-bust:not(.is-reduced):not(.aiba-behavior--sleep):not(.aiba-figure--drowsy) .aiba-brow--right {
+  animation-delay: 0.028s;
 }
 
 .aiba-bust.aiba-behavior--sleep .aiba-eye,
-.aiba-bust.aiba-figure--drowsy .aiba-eye {
+.aiba-bust.aiba-figure--drowsy .aiba-eye,
+.aiba-bust.aiba-behavior--sleep .aiba-brow,
+.aiba-bust.aiba-figure--drowsy .aiba-brow {
   animation: none;
-}
-
-.aiba-bust.aiba-behavior--sleep .aiba-eye-shine {
-  display: none;
 }
 
 @keyframes aibaPonytailSwayLeft {
@@ -2385,12 +2395,21 @@ select:disabled {
   padding: 2px 4px 8px;
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-app-region: no-drag;
 }
 
 .today-studio {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 14px;
+}
+
+/* Keep goal → From Unwind → Tasks as one tight stack */
+.today-studio > .core-intent + .plan-tomorrow-prompt,
+.today-studio > .core-intent + .studio-margin-section,
+.today-studio > .plan-tomorrow-prompt + .studio-margin-section {
+  margin-top: 2px;
 }
 
 .core-intent--v2 {
@@ -2567,11 +2586,14 @@ select:disabled {
 
 .studio-margin-section__label {
   margin: 0;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--studio-text-muted);
+  /* Integer size + tighter tracking reads sharper than 10.5px / 0.22em on Windows */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 .studio-link--underline {

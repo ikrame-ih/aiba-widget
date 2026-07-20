@@ -274,13 +274,49 @@ button {
 }
 
 @keyframes aibaBlink {
+  /* Long calm open, then a fast close / open (and a soft double blink) */
   0%,
-  90%,
+  82%,
   100% {
     transform: scaleY(1);
   }
-  95% {
-    transform: scaleY(0.08);
+  84% {
+    transform: scaleY(0.18);
+  }
+  85.2% {
+    transform: scaleY(0.04);
+  }
+  87% {
+    transform: scaleY(1);
+  }
+  92% {
+    transform: scaleY(1);
+  }
+  93.2% {
+    transform: scaleY(0.2);
+  }
+  94.2% {
+    transform: scaleY(0.06);
+  }
+  96% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes aibaBrowBlink {
+  0%,
+  82%,
+  87%,
+  92%,
+  96%,
+  100% {
+    transform: translateY(0);
+  }
+  84%,
+  85.2%,
+  93.2%,
+  94.2% {
+    transform: translateY(1.2px);
   }
 }
 
