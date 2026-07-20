@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+*.log
+tests/.artifacts/
+.env
+.env.local
+
+# Local scratch / agent leftovers (never commit)
+.agents/
+_v0-import/
+_zip_extract_v2/
+_figma-import/
+skills-lock.json

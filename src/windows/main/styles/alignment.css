@@ -1,0 +1,303 @@
+/* Shared alignment tweaks for headers and section titles */
+
+/* —— Contextual onboarding hint —— */
+.contextual-hint {
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 48px;
+  padding: 12px 14px;
+}
+
+.contextual-hint p {
+  flex: 1;
+  min-width: 0;
+  align-self: center;
+  margin: 0;
+}
+
+.contextual-hint .btn-ghost {
+  flex-shrink: 0;
+  align-self: center;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* —— Main header: phase + time only (window controls float at widget corner) —— */
+.studio-main__header {
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 52px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.studio-main__header--sticky {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.studio-main__titlebar {
+  align-items: center;
+  align-self: stretch;
+}
+
+.studio-main__header-meta {
+  align-items: center;
+  align-self: center;
+}
+
+.studio-main__phase {
+  align-items: center;
+  align-self: center;
+  gap: 10px;
+  line-height: 1;
+  margin: 0;
+}
+
+.studio-main__kanji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+  height: 1.15em;
+  width: 1.15em;
+  margin: 0;
+  transform: translate(0.02em, 0.05em);
+}
+
+.studio-main__phase-label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding-top: 0;
+  margin: 0;
+}
+
+.studio-main__time {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  line-height: 1;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* —— Sidebar phase nav —— */
+.studio-phase-nav__item {
+  align-items: center;
+  min-height: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.studio-phase-nav__kanji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  min-width: 1.2em;
+}
+
+.studio-phase-nav__label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+/* —— Section blocks (Tasks, Notes, History…) —— */
+.studio-margin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.studio-margin-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid rgba(197, 169, 117, 0.28);
+}
+
+.studio-margin-section__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+  line-height: 1;
+}
+
+.studio-margin-section__kanji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1;
+  color: rgba(197, 169, 117, 0.92);
+  writing-mode: horizontal-tb;
+}
+
+.studio-margin-section__label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--studio-text-muted);
+}
+
+.studio-margin-section__action {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+}
+
+.studio-margin-section__content {
+  min-width: 0;
+}
+
+/* —— Core intent lead (Today's goal) —— */
+.core-intent__lead {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  box-sizing: border-box;
+  min-height: 28px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.core-intent__lead-kanji {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 1;
+  font-size: 14px;
+}
+
+.core-intent__lead-text {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.3;
+}
+
+/* —— Kickers with kanji (Focus, Unwind panels) —— */
+.focus-studio__kicker,
+.unwind-studio__kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  box-sizing: border-box;
+  min-height: 24px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.focus-studio__kicker-kanji,
+.unwind-studio__kicker-kanji {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 1;
+  font-size: 14px;
+}
+
+.focus-studio__kicker-sep,
+.unwind-studio__kicker-sep {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(168, 152, 136, 0.55);
+  line-height: 1;
+  user-select: none;
+}
+
+.focus-studio__kicker-text,
+.unwind-studio__kicker-text {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.3;
+}
+
+/* —— Panel / prep block labels —— */
+.studio-main .panel-label,
+.focus-prep__task-label,
+.focus-prep__block-label {
+  display: block;
+  line-height: 1.3;
+}
+
+.focus-prep__block-label {
+  margin-bottom: 8px;
+}
+
+.setting-row {
+  align-items: center;
+}
+
+.setting-row input[type="checkbox"] {
+  align-self: center;
+  margin-top: 0;
+}
+
+.plan-tomorrow-prompt {
+  box-sizing: border-box;
+}
+
+.plan-tomorrow-prompt__actions {
+  align-items: center;
+}
+
+.segmented-control {
+  align-items: stretch;
+}
+
+.segmented-control button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* —— Task rows —— */
+.studio-task--v2 {
+  align-items: center;
+}
+
+.studio-task__dot-btn {
+  align-self: center;
+}
+
+.studio-task__content {
+  align-self: center;
+}
+
+.studio-task-add--inline {
+  align-items: center;
+  min-height: 36px;
+}
+
+.studio-task-add--inline input {
+  line-height: 1.4;
+}
+
+[data-theme="light"] .studio-margin-section__head {
+  border-left-color: rgba(168, 134, 74, 0.35);
+}

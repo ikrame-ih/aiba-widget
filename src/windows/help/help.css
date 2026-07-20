@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 28px 24px 24px;
+  background: #1a1816;
+  color: #e0dcd5;
+  font-family: "Outfit", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.drag-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.close-button {
+  position: fixed;
+  top: 10px;
+  right: 12px;
+  border: 1px solid rgba(197, 169, 117, 0.18);
+  background: rgba(61, 53, 53, 0.7);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font: inherit;
+  color: #a89888;
+}
+
+.help-shell h1 {
+  margin: 8px 0 12px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: "Noto Serif JP", Georgia, serif;
+}
+
+.label {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c5a975;
+}
+
+.body-sm {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #a89888;
+}
+
+.break-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  font-size: 0.92rem;
+}
+
+.break-table th,
+.break-table td {
+  text-align: left;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(197, 169, 117, 0.16);
+}
+
+.break-table th:last-child,
+.break-table td:last-child {
+  text-align: right;
+  color: #c5a975;
+  font-weight: 600;
+}

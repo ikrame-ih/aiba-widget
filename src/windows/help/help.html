@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aiba Help</title>
+    <link rel="stylesheet" href="./help.css" />
+  </head>
+  <body>
+    <div class="drag-strip" aria-hidden="true"></div>
+    <button class="close-button no-drag" type="button" id="help-close" onclick="window.api.closeWindow()">
+      Close
+    </button>
+
+    <main class="help-shell">
+      <p class="label" id="help-label">Focus guide</p>
+      <h1 id="help-title">Deep work rhythm</h1>
+      <p class="body-sm" id="help-intro"></p>
+
+      <table class="break-table">
+        <thead>
+          <tr>
+            <th scope="col" id="help-worked-col">Worked</th>
+            <th scope="col" id="help-break-col">Break</th>
+          </tr>
+        </thead>
+        <tbody id="help-rows"></tbody>
+      </table>
+    </main>
+
+    <script type="module">
+      import { getBreakRulesCopy } from "../../shared/help-knowledge.js";
+      import { resolveLocale } from "../../shared/copy/index.js";
+
+      const locale = resolveLocale(new URLSearchParams(window.location.search).get("lang"));
+      const copy = getBreakRulesCopy(locale);
+
+      document.documentElement.lang = locale;
+      document.title = copy.pageTitle;
+      document.getElementById("help-label").textContent = copy.label;
+      document.getElementById("help-title").textContent = copy.title;
+      document.getElementById("help-intro").textContent = copy.intro;
+      document.getElementById("help-worked-col").textContent = copy.workedCol;
+      document.getElementById("help-break-col").textContent = copy.breakCol;
+
+      const closeBtn = document.getElementById("help-close");
+      closeBtn.textContent = copy.close;
+      closeBtn.setAttribute("aria-label", copy.closeAria);
+
+      document.getElementById("help-rows").innerHTML = copy.rows
+        .map((row) => `<tr><td>${row.worked}</td><td>${row.break}</td></tr>`)
+        .join("");
+    </script>
+  </body>
+</html>
