@@ -1,186 +1,168 @@
 # Aiba
 
-A desktop productivity companion for Windows. Plan the day, protect a focus block, then wrap up with a clear next step — with a small geisha-inspired mascot keeping you company.
+![Electron](https://img.shields.io/badge/Electron-35-47848F?logo=electron&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
 
----
+**Desktop productivity companion for Windows** — plan the day, protect a focus block, then wrap up with a clear next step. Local-first Electron widget with a small geisha-inspired companion.
 
-## Context
+Originally a personal gift built quickly and left on my machine. I later rebuilt it for portfolio work: clearer architecture, Preferences, session history, and offline Ask Aiba help.
 
-I started Aiba as a personal gift. I built the first version quickly, with more care than architecture, and it sat on my computer for months.
+| | |
+| --- | --- |
+| **Source** | [github.com/ikrame-ih/aiba-widget](https://github.com/ikrame-ih/aiba-widget) |
+| **Platform** | Windows (Electron) |
+| **Data** | Local JSON only — no account, no cloud |
 
-When I opened it again, it no longer matched what I knew how to build — or what I wanted to show. So I picked it back up: reorganized the code, separated Electron and React more clearly, added Preferences, session history, offline help, and polished the UI until it felt actually usable.
+## Highlights
 
-It is still a small project, but much sturdier than the first pass.
-
----
-
-## Demo
-
-<!-- Add a GIF or short video link when you have one -->
-
-_Coming soon._
-
----
-
-## Screenshots
-
-### Compact timer
-
-![Compact focus timer widget](docs/images/compact-focus.png)
-
-### Plan
-
-![Plan view: daily goal and tasks](docs/images/plan.png)
-
-### Focus
-
-![Focus view: session setup](docs/images/focus.png)
-
-### Unwind
-
-![Unwind view: end-of-day wrap-up](docs/images/unwind.png)
-
-### Preferences
-
-![Preferences panel](docs/images/preferences.png)
-
-### Ask Aiba
-
-![Ask Aiba FAQ in the sidebar](docs/images/ask-aiba.png)
-
-> Images in `docs/images/` are reference mockups for the README.
-> Replace them with real captures from `npm run dev` when you can (same filenames).
-
----
-
-## Features
-
-- **Plan / Focus / Unwind** — three manual modes (last choice is remembered)
-- **Compact widget** — timer with arc, pause, and expand
-- **Expanded studio** — sidebar with Aiba, phase nav, and FAQ
-- **Sessions** — local history and patterns once you have enough data
-- **Tunnel vision** — dims the desktop during focus
-- **Focus guard** — concentration helpers + optional reversible site block
-- **Ask Aiba** — offline FAQ answers (EN / ES)
+- **Plan / Focus / Unwind** — three manual modes (last choice remembered)
+- **Compact + expanded** — timer widget and full studio shell with sidebar companion
+- **Sessions** — local history; patterns unlock after enough completed blocks
+- **Tunnel vision + focus guard** — dim desktop during focus; optional reversible site block
+- **Ask Aiba** — offline FAQ (EN / ES)
 - **Preferences** — theme, language, reduced motion, focus environment
-- **Local data only** — no account, no cloud
 
----
+## Preview
 
-## Tech Stack
+Captured from the real Electron window (`npm run capture:readme`). Shown side-by-side so they stay readable on GitHub.
 
-| Layer | Tech |
-|-------|------|
-| Desktop | Electron 35 |
-| UI | React 19 + TypeScript |
-| Build | Vite 6 |
-| Tests | Vitest |
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/compact-dark.png" alt="Compact timer — dark" />
+      <br /><sub><b>Compact</b> — dark</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/compact-light.png" alt="Compact timer — light" />
+      <br /><sub><b>Compact</b> — light</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/plan-dark.png" alt="Plan — dark" />
+      <br /><sub><b>Plan</b> — dark</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/plan-light.png" alt="Plan — light" />
+      <br /><sub><b>Plan</b> — light</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/focus-dark.png" alt="Focus — dark" />
+      <br /><sub><b>Focus</b> — dark</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/focus-light.png" alt="Focus — light" />
+      <br /><sub><b>Focus</b> — light</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/unwind-dark.png" alt="Unwind — dark" />
+      <br /><sub><b>Unwind</b> — dark</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/unwind-light.png" alt="Unwind — light" />
+      <br /><sub><b>Unwind</b> — light</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/preferences-dark.png" alt="Preferences — dark" />
+      <br /><sub><b>Preferences</b> — dark</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/preferences-light.png" alt="Preferences — light" />
+      <br /><sub><b>Preferences</b> — light</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/ask-aiba-dark.png" alt="Ask Aiba — dark" />
+      <br /><sub><b>Ask Aiba</b> — dark</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/ask-aiba-light.png" alt="Ask Aiba — light" />
+      <br /><sub><b>Ask Aiba</b> — light</sub>
+    </td>
+  </tr>
+</table>
 
----
+## Quick start
 
-## Setup
+**Prerequisites:** Node.js 20+, Windows, npm.
 
 ```bash
+git clone https://github.com/ikrame-ih/aiba-widget.git
+cd aiba-widget
 npm install
-```
-
-## Usage
-
-Development (Vite + Electron):
-
-```bash
 npm run dev
 ```
 
-Local production build:
+Production build:
 
 ```bash
 npm run build
 npm start
 ```
 
-Tests and types:
-
-```bash
-npm test
-npm run typecheck
-```
-
-### Window sizes
-
 | Mode | Size |
-|------|------|
+| --- | --- |
 | Compact | 400 × 480 |
 | Expanded | 900 × 720 |
 
----
+## Scripts
 
-## Project structure
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Vite + Electron |
+| `npm run build` | Production renderer build |
+| `npm start` | Run built app |
+| `npm test` | Vitest (schema, session, bounds…) |
+| `npm run typecheck` | TypeScript (`tsc --noEmit`) |
+| `npm run test:electron` | Electron smoke (compact + expanded) |
+| `npm run capture:readme` | Regenerate README screenshots (dark + light) |
+
+## Stack
+
+Electron 35 · React 19 · TypeScript · Vite 6 · Vitest
+
+## Project layout
 
 ```
-electron/               # Main process, preload, storage, guard
-src/shared/             # Schema, EN/ES copy, session machine, help
-src/windows/main/       # React app (compact + studio)
-src/windows/help/       # Break-guide window
-src/assets/             # App icon / favicon
-tests/                  # Logic tests (schema, session, bounds…)
-docs/                   # Product notes + README images
+electron/            # Main process, preload, storage, guard
+src/shared/          # Schema, EN/ES copy, session machine, help
+src/windows/main/    # React app (compact + studio)
+src/windows/help/    # Break-guide window
+src/assets/          # App icon / favicon
+tests/               # Logic + Electron smoke
+docs/images/         # README screenshots
+scripts/             # README capture launcher
 ```
 
-How the pieces split:
+## Regenerate screenshots
 
-- **Electron** owns the window, IPC, storage, and Windows-specific bits (hosts / overlay).
-- **React** owns the UI and session state wiring.
-- **`src/shared`** is what both (and the tests) can read without tight coupling.
+Deletes previous PNGs under `docs/images/`, then captures the real widget in **dark** and **light**:
 
----
+```bash
+# PowerShell — wipe old captures (including any leftover mockups)
+Remove-Item -Force docs\images\*.png -ErrorAction SilentlyContinue
 
-## Technical decisions
+# Capture from Electron (build + dark/light suite)
+npm run capture:readme
+```
 
-**Why Electron + React**  
-I wanted an always-visible desktop widget, not a website. Electron gives the frameless window; React makes Plan / Focus / Unwind easier to iterate without reinventing the DOM.
+## Documentation
 
-**Local JSON state**  
-There is no backend. The schema lives in `data-schema.js` with migrations, so I can change the data shape without breaking older installs.
-
-**Separate session machine**  
-The timer flow (focus → recovery → review) lives in `session-machine.js`. The UI does not invent transitions, and tests can cover the flow without booting Electron.
-
-**EN / ES copy**  
-Almost all strings come from `src/shared/copy`. That keeps stray hard-coded text down and makes language switching a Preferences toggle.
-
-**Ask Aiba offline**  
-I started with a free-text matcher and landed on a topic FAQ. The resolver is still there (and tested) if I bring a search box back; the FAQ is clearer for first-time use.
-
-**Layered CSS**  
-There are several stylesheets (`tokens`, `app`, `studio-refine`…). Not the cleanest setup, but it let me iterate the UI without rewriting everything at once. I would consolidate if the project grows.
-
-**Accessibility (basics)**  
-Chrome buttons have labels, the FAQ uses `aria-expanded`, panels have `aria-label`, and key controls show a focus ring. Not a full a11y audit — just not left to chance.
-
----
-
-## Possible next steps
-
-- Windows installer (electron-builder)
-- Optional sounds when a block ends
-- Export / import the local JSON
-- Free-text Ask Aiba (reuse the resolver)
-- Playwright UI tests against the Electron window
-- Configurable global shortcuts in Preferences
-
----
-
-## What I learned
-
-**At first** I learned how to ship a usable desktop app quickly: frameless window, drag regions, a timer that survives minimize. I also learned that “works on my machine” is not the same as “easy to maintain.”
-
-**Coming back to it** I learned to cut: old import folders, unused assets, CSS for screens that no longer exist. Splitting schema / session / UI forced real tests. Writing bilingual copy without duplicating logic helped too.
-
-Main takeaway: a portfolio piece does not need to be huge. It needs to look cared for.
-
----
+Internal notes live in [`docs/`](docs/) — product and design context.
 
 ## License
 
-ISC · Built by Tizza
+© Ikrame Ibn Hayoun. Source available in this repository for portfolio review.
+
+## Author
+
+**Ikrame Ibn Hayoun** — [Portfolio](https://ikrame-ih.vercel.app/) · [GitHub](https://github.com/ikrame-ih) · [LinkedIn](https://www.linkedin.com/in/ikrame-ih/)

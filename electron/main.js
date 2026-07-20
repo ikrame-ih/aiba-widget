@@ -182,6 +182,174 @@ function createTray() {
   });
 }
 
+async function runReadmeCapture(outDir) {
+  const { loadData, saveData } = require("./services/storage");
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const shot = async (name) => {
+    await sleep(400);
+    const image = await mainWindow.webContents.capturePage();
+    const file = path.join(outDir, `${name}.png`);
+    fs.writeFileSync(file, image.toPNG());
+    console.log(`AIBA_README_CAPTURE_SAVED:${name}`);
+  };
+  const waitFor = async (selector, attempts = 80) => {
+    for (let i = 0; i < attempts; i += 1) {
+      const ready = await mainWindow.webContents.executeJavaScript(
+        `Boolean(document.querySelector(${JSON.stringify(selector)}))`,
+      );
+      if (ready) return;
+      await sleep(50);
+    }
+    throw new Error(`Timed out waiting for ${selector}`);
+  };
+  const click = async (selector) => {
+    await mainWindow.webContents.executeJavaScript(`
+      document.querySelector(${JSON.stringify(selector)})?.click();
+    `);
+    await sleep(220);
+  };
+  const setTheme = async (theme) => {
+    const data = loadData() || {};
+    data.settings = { ...(data.settings || {}), theme };
+    saveData(data);
+    await mainWindow.webContents.executeJavaScript("location.reload()");
+    await sleep(900);
+    await waitFor(".app-shell");
+    const actual = await mainWindow.webContents.executeJavaScript(
+      `document.querySelector(".app-shell")?.dataset.theme ?? null`,
+    );
+    if (actual !== theme) {
+      throw new Error(`Theme did not apply (wanted ${theme}, got ${actual})`);
+    }
+  };
+  const captureSuite = async (theme) => {
+    const suffix = theme === "light" ? "light" : "dark";
+
+    applyWidgetMode("compact", true);
+    await waitFor(".widget--compact");
+    await shot(`compact-${suffix}`);
+
+    applyWidgetMode("expanded", true);
+    await waitFor(".widget--expanded");
+    await waitFor(".studio-shell");
+
+    await click(".studio-phase-nav__item--morning");
+    await waitFor(".today-studio");
+    await shot(`plan-${suffix}`);
+
+    await click(".studio-phase-nav__item--afternoon");
+    await sleep(350);
+    await shot(`focus-${suffix}`);
+
+    await click(".studio-phase-nav__item--evening");
+    await waitFor(".unwind-studio");
+    await shot(`unwind-${suffix}`);
+
+    await click(".studio-sidebar__link:last-of-type");
+    await waitFor(".settings-panel, .studio-overlay");
+    await shot(`preferences-${suffix}`);
+
+    await click(".studio-back-link");
+    await sleep(220);
+    await click(".studio-phase-nav__item--morning");
+    await sleep(220);
+    await click(".ask-aiba__faq-trigger");
+    await sleep(280);
+    await shot(`ask-aiba-${suffix}`);
+  };
+
+  try {
+    const now = Date.now();
+    const data = loadData() || {};
+    data.widgetMode = "compact";
+    data.settings = {
+      ...(data.settings || {}),
+      theme: "dark",
+      language: "en",
+      timeMode: "morning",
+      displayName: "Ikrame",
+      reducedMotion: true,
+    };
+    data.onboardingSeen = {
+      firstTask: true,
+      firstFocus: true,
+      firstShutdown: true,
+    };
+    data.dailyOutcome = "Ship a calm focus block before lunch";
+    data.openLoops = "Reply to the design review thread";
+    data.priorities = [
+      { id: "p1", text: "Finish the morning plan", done: false },
+      { id: "p2", text: "Review session notes", done: true },
+    ];
+    data.primaryTaskId = "p1";
+    data.focusSession = {
+      ...(data.focusSession || {}),
+      status: "focusing",
+      objective: "Finish the morning plan",
+      plannedMinutes: 25,
+      phaseStartedAt: now - 60_000,
+      accumulatedSeconds: 60,
+      recoveryMinutes: 8,
+      skill: 3,
+      challenge: 3,
+      energy: 3,
+      taskType: "deep",
+      feedbackMetric: "milestone",
+      interruptions: 0,
+    };
+    data.shutdown = {
+      sessionOutcome: "Kept the block uninterrupted",
+      disposition: "continue",
+      nextAction: "Outline tomorrow's first task",
+      nextBlockAt: "",
+      complete: false,
+    };
+    data.flowSessions = [
+      {
+        id: "s1",
+        task: "Morning plan",
+        actualMinutes: 25,
+        plannedMinutes: 25,
+        depth: 4,
+        hour: 10,
+        taskType: "deep",
+        endedAt: now - 3_600_000,
+      },
+      {
+        id: "s2",
+        task: "Deep work block",
+        actualMinutes: 50,
+        plannedMinutes: 50,
+        depth: 5,
+        hour: 11,
+        taskType: "deep",
+        endedAt: now - 1_800_000,
+      },
+    ];
+    saveData(data);
+    await mainWindow.webContents.executeJavaScript("location.reload()");
+    await sleep(900);
+    await waitFor(".app-shell");
+
+    fs.mkdirSync(outDir, { recursive: true });
+    for (const file of fs.readdirSync(outDir)) {
+      if (file.endsWith(".png")) fs.unlinkSync(path.join(outDir, file));
+    }
+
+    await captureSuite("dark");
+    await setTheme("light");
+    await captureSuite("light");
+
+    console.log("AIBA_README_CAPTURE_OK");
+    cleanupBeforeQuitComplete = true;
+    app.exit(0);
+  } catch (error) {
+    console.error(`AIBA_README_CAPTURE_FAILED:${error.message}`);
+    cleanupBeforeQuitComplete = true;
+    app.exit(1);
+  }
+}
+
 async function runElectronSmoke(initialMode) {
   const assertMode = (mode) => {
     const expected = WIDGET_SIZES[mode];
@@ -357,7 +525,21 @@ app.whenReady().then(() => {
   screen.on("display-added", handleDisplayChange);
   screen.on("display-removed", handleDisplayChange);
 
-  if (process.env.AIBA_SMOKE) {
+  if (process.env.AIBA_README_CAPTURE) {
+    mainWindow.webContents.once("did-finish-load", () => {
+      void runReadmeCapture(process.env.AIBA_README_CAPTURE);
+    });
+    mainWindow.webContents.once(
+      "did-fail-load",
+      (_event, errorCode, errorDescription) => {
+        console.error(
+          `AIBA_README_CAPTURE_FAILED:${errorCode}:${errorDescription}`,
+        );
+        cleanupBeforeQuitComplete = true;
+        app.exit(1);
+      },
+    );
+  } else if (process.env.AIBA_SMOKE) {
     mainWindow.webContents.once("did-finish-load", () => {
       void runElectronSmoke(currentWidgetMode);
     });
