@@ -171,7 +171,7 @@ Internal notes live in [`docs/`](docs/) — product and design context.
 
 ## License
 
-© Ikrame Ibn Hayoun. Source available in this repository for portfolio review.
+© Ikrame Ibn Hayoun.
 
 ## Author
 
