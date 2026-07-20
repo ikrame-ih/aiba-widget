@@ -7,7 +7,7 @@
 
 **Desktop productivity companion for Windows** — plan the day, protect a focus block, then wrap up with a clear next step. Local-first Electron widget with a small geisha-inspired companion.
 
-Originally a personal gift built quickly and left on my machine. I later rebuilt it for portfolio work: clearer architecture, Preferences, session history, and offline Ask Aiba help.
+Originally a personal gift built quickly and left on my machine. I later decided to rebuilt it and include it for portfolio work: clearer architecture, Preferences, session history, and offline Ask Aiba help.
 
 |              |                                                                              |
 | ------------ | ---------------------------------------------------------------------------- |
