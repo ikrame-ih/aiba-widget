@@ -4,9 +4,8 @@
     alt=""
     width="44"
     height="44"
-    style="vertical-align: middle; margin-right: 0.4rem"
-  />
-  <span style="vertical-align: middle">Aiba</span>
+    style="vertical-align: -0.55em; margin-right: 0.4rem"
+  />Aiba
 </h1>
 
 ![Electron](https://img.shields.io/badge/Electron-35-47848F?logo=electron&logoColor=white)
